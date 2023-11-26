@@ -12,4 +12,41 @@
     ne ha richieste l’utente.
 */
 
-fetch('https://v2.jokeapi.dev/joke/')
+const request = async () => {
+  let jokeToPrint;
+  try {
+    const response = await fetch("https://v2.jokeapi.dev/joke/Programming")
+      .then((response) => response.json())
+      .then((obj) => {
+        const { joke } = obj;
+        jokeToPrint = joke;
+        if (jokeToPrint === undefined) {
+          jokeToPrint = `Sorry, can't fetch this joke.`;
+        }
+      });
+  } catch (error) {
+    console.error(error);
+  } finally {
+    const div = document.getElementById("jokes");
+    const figure = document.createElement("figure");
+    figure.innerHTML = `${jokeToPrint}`;
+    div.appendChild(figure);
+  }
+};
+
+window.addEventListener("load", () => {
+  const input = document.querySelector("input");
+  const button = document.querySelector("button");
+  const div = document.getElementById("jokes");
+  button.addEventListener("click", () => {
+    div.innerHTML = "";
+    const value = Number(input.value);
+    if (isNaN(value)) {
+      div.innerHTML = "Please, write a numeric value!";
+    } else {
+      for (let i = 0; i < value; i++) {
+        request();
+      }
+    }
+  });
+});
