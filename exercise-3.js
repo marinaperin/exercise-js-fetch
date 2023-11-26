@@ -49,6 +49,7 @@ window.addEventListener("load", () => {
     browseCountries(value);
   });
   input.addEventListener("keypress", (event) => {
+    div.innerHTML = '';
     const value = input.value.trim();
     if (event.key === "Enter") {
       browseCountries(value);
