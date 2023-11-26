@@ -1,12 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ricerca Paesi Per Lingua</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Browse countries by language</title>
     <script src="./exercise-3.js"></script>
-</head>
-<body>
-    
-</body>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+        color: rgb(7, 79, 88);
+      }
+      body {
+        padding: 1rem;
+        background-color: rgb(221, 251, 255);
+        text-align: center;
+        margin-inline: 5rem;
+      }
+      h1 {
+        padding: 1rem;
+        text-align: center;
+      }
+      #input-area {
+        padding: 1rem;
+        border-bottom: 1px solid rgb(7, 79, 88);
+        margin-bottom: 2rem;
+      }
+      p {
+        padding: 1rem;
+      }
+      input {
+        padding: 0.4rem;
+        text-align: center;
+      }
+      button {
+        padding: 0.4rem;
+        outline: none;
+        border: 1px solid rgb(7, 79, 88);
+        font-style: italic;
+        background-color: powderblue;
+        transition: 0.5s;
+      }
+      button:hover {
+        background-color: rgb(29, 140, 154);
+        color: white;
+      }
+      #countries {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+      figure {
+        border: 1px solid rgb(7, 79, 88);
+        padding: 1rem;
+        background-color: white;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+      img{
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Exercise 3:</h1>
+    <div id="input-area">
+      <p>Browse countries by language</p>
+      <input type="text" placeholder="Language" />
+      <button>Browse</button>
+    </div>
+    <div id="countries"></div>
+  </body>
 </html>
