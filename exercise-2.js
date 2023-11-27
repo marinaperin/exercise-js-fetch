@@ -15,15 +15,13 @@
 const request = async () => {
   let jokeToPrint;
   try {
-    const response = await fetch("https://v2.jokeapi.dev/joke/Programming")
-      .then((response) => response.json())
-      .then((obj) => {
-        const { joke } = obj;
-        jokeToPrint = joke;
-        if (jokeToPrint === undefined) {
-          jokeToPrint = `Sorry, can't fetch this joke.`;
-        }
-      });
+    const response = await fetch("https://v2.jokeapi.dev/joke/Programming");
+    const jokes = response.json();
+    const { joke } = jokes;
+    jokeToPrint = joke;
+    if (jokeToPrint === undefined) {
+      jokeToPrint = `Sorry, can't fetch this joke.`;
+    }
   } catch (error) {
     console.error(error);
   } finally {

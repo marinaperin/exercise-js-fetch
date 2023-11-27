@@ -18,6 +18,10 @@ window.addEventListener("load", () => {
     .then((obj) => (posts = obj))
     .catch((error) => console.error(error))
     .finally(() => {
+      if(!posts){
+        main.innerHTML = `Problem`;
+        return;
+      }
       posts.forEach(({ title, body }) => {
         main.innerHTML += `
          <figure>

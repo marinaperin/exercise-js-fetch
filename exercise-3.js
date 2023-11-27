@@ -16,27 +16,29 @@
 
 const browseCountries = async (value) => {
   const div = document.getElementById("countries");
-  let countries;
-  const request = await fetch(`https://restcountries.com/v3.1/lang/${value}`)
-    .then((response) => response.json())
-    .then((obj) => {
-      countries = obj.sort((a, b) => a.name.official < b.name.official ? -1 : 1);
-    })
-    .catch((error) => console.error(error))
-    .finally(() => {
-      countries.forEach(({ name: { official: name }, languages, flags }) => {
-        const keys = Object.keys(languages);
-        const values = Object.values(languages);
-        const languageList = `${values}`;
-        div.innerHTML += `
+  try {
+    const response = await fetch(`https://restcountries.com/v3.1/lang/${value}`);
+    let countries = await response.json();
+    countries = countries.sort((a, b) => a.name.official < b.name.official ? -1 : 1);
+    if (!countries) {
+    div.innerHTML = "Sorry, no country speaks this language";
+  }
+  const printCountries = countries.forEach(({ name: { official: name }, languages, flags }) => {
+    const keys = Object.keys(languages);
+    const values = Object.values(languages);
+    console.log(values);
+    const languageList = `${values}`;
+    div.innerHTML += `
             <figure>
                 <h3>${name}</h3>
                 <img src="${flags.png}" alt="${flags.alt}">
                 <p>Language${keys.length > 1 ? "s" : ""}: ${languageList}</p>
             </figure>
         `;
-      });
-    });
+  });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 window.addEventListener("load", () => {
@@ -49,7 +51,7 @@ window.addEventListener("load", () => {
     browseCountries(value);
   });
   input.addEventListener("keypress", (event) => {
-    div.innerHTML = '';
+    div.innerHTML = "";
     const value = input.value.trim();
     if (event.key === "Enter") {
       browseCountries(value);
